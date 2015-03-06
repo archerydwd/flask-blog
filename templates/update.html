@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block the_body %}
+	{% for id, art_title, art_text in article %}
+	<form action="{{ changes_link }}" method="post">
+		<p>
+			Title:<br>
+			<input name="article_title" value="{{ art_title }}"/>
+		</p>
+		<p>
+			Text:<br>
+			<textarea name="article_text">{{ art_text }}</textarea>
+		</p>
+		<p>
+			<input type="hidden" name="article_id" value="{{ id }}" />
+			<input type="submit" value="Update Article"/>
+		</p>
+	</form>
+	{% endfor %}
+	<form action="{{ index_link }}" method="POST"><button type="submit">Back</button></form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block the_body %}
+	<h1>New article</h1>
+	
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+				{% for message in messages %}
+					<li>{{ message }}
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+	
+	<form action="{{ save_article_link }}" method="POST">
+		<p>
+			Title:<br>
+			<input type="text" name="article_title">
+		</p>
+		<p>
+			Text:<br>
+			<textarea name="article_text"></textarea>
+		</p>
+		<p>
+			<input type="submit" value="Create Article">
+		</p>
+	</form>
+	<form action="{{ index_link }}" method="POST">
+		<button type="submit">Back</button>
+	</form>
+{% endblock %}

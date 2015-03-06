@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block the_body %}
+	<h1>Listing articles</h1>
+	<a href="{{ create_link }}">New article</a>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Text</th>
+			<th colspan="3"></th>
+			{% for id, art_title, art_text in articles %}
+				<tr>
+					<td>{{ art_title }}</td>
+					<td>{{ art_text }}</td>
+					<td><form action="{{ show_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Show"></form></td>
+					<td><form action="{{ update_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Edit"></form></td>
+					<td><form action="{{ delete_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Destroy"></form></td>
+				</tr>
+			{% endfor %}
+	</table>
+{% endblock %}
+	

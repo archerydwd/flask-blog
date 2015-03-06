@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block the_body %}
+	{% for id, art_title, art_text in article %}
+		<p>
+			<strong>Title:</strong>
+			{{ art_title }}
+		</p>
+		<p>
+			<strong>Text:</strong>
+			{{ art_text }}
+		</p>
+	{% endfor %}
+
+		<h2>Comments</h2>
+			{% for comm_id, art_id, commenter, body in comments %}
+					<p>
+						<strong>Commenter:</strong>
+						{{ commenter }}
+					</p>
+					<p>
+						<strong>Comment:</strong>
+						{{ body }}
+					</p>
+					<form action="{{ delete_comment_link }}" method="POST"><input type="hidden" name="article_id" value="{{ art_id }}"><input type="hidden" name="comment_id" value="{{ comm_id }}"><input type="submit" value="Delete Comment"></form>
+			{% endfor %}
+
+	{% for id, art_title, art_text in article %}
+		<h2>Add a comment:</h2>
+		<form method="post" action="{{ create_comment_link }}">
+			<input type="hidden" name="article_id" value="{{ id }}" />
+			<p>
+				Commenter:<br>
+				<input type="text" name="commenter" />
+			</p>
+			<p>
+				Body:<br>
+				<textarea name="body"></textarea>
+			</p>
+			<p>
+				<input type="submit" value="Create Comment" />
+			</p>
+		</form>
+
+		<table>
+			<tr>
+				<td><form action="{{ index_link }}" method="POST"><button type="submit">Back</button></form></td>
+				<td><form action="{{ update_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Edit"></form></td>
+			</tr>
+		</table>
+	{% endfor %}
+{% endblock %}
