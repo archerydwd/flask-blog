@@ -10,3 +10,25 @@ I am going to be performing tests on this app using some load testing tools such
 Once I have tested this application and the other verisons of it, I will publish the results, which can then be used as a benchmark for others when trying to choose a framework.
 
 You can build this app using a framework of your choosing and then follow the testing mechanisms that I will describe and then compare the results against my benchmark to get an indication of performance levels of your chosen framework.
+
+==
+###Installing Flask
+==
+
+At time of writing this the Python version was: 2.7.9 and the Flask version was: 0.10.1
+
+**Install Python**
+
+On OSX follow the link: https://www.python.org/ftp/python/2.7.9/python-2.7.9-macosx10.6.pkg
+Open this and follow the instructions.
+
+On Linux
+
+**Install Flask**
+
+On OSX:
+
+```
+pip install Flask
+```
+
