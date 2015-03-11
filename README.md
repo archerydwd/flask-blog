@@ -24,6 +24,15 @@ Open this and follow the instructions.
 
 On Linux
 
+wget http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
+tar -xzf Python-2.7.9.tgz  
+cd Python-2.7.9
+
+./configure  
+make  
+sudo make install
+
+
 **Install Flask**
 
 On OSX:
