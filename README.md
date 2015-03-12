@@ -15,18 +15,18 @@ You can build this app using a framework of your choosing and then follow the te
 ###Installing Flask
 ==
 
-At time of writing this the Python version was: 2.7.9 and the Flask version was: 0.10.1
+At time of writing this the Python version was: 3.4.3 and the Flask version was: 0.10.1
 
 **Install Python**
 
-On OSX follow the link: https://www.python.org/ftp/python/2.7.9/python-2.7.9-macosx10.6.pkg
+On OSX follow the link: https://www.python.org/ftp/python/3.4.3/python-3.4.3-macosx10.6.pkg
 Open this and follow the instructions.
 
 On Linux
 
-wget http://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
-tar -xzf Python-2.7.9.tgz  
-cd Python-2.7.9
+wget http://www.python.org/ftp/python/3.4.3/Python-3.4.3.tgz
+tar -xzf Python-3.4.3.tgz  
+cd Python-3.4.3
 
 ./configure  
 make  
