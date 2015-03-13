@@ -35,8 +35,6 @@ sudo make install
 
 **Install Flask**
 
-On OSX:
-
 ```
 pip install Flask
 ```
