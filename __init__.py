@@ -145,5 +145,6 @@ def delete_comment():
 connection.commit()
 
 app.config['SECRET_KEY'] = 'thisismysecretkeywhichyouwillneverguesshahahahahahahahaha'
-app.run()
+if __name__ == "__main__":
+	app.run()
 
