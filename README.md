@@ -11,19 +11,20 @@ Once I have tested this application and the other verisons of it, I will publish
 
 You can build this app using a framework of your choosing and then follow the testing mechanisms that I will describe and then compare the results against my benchmark to get an indication of performance levels of your chosen framework.
 
-==
-###Installing Flask
-==
+=
+###Install Python
 
 At time of writing this the Python version was: 3.4.3 and the Flask version was: 0.10.1
+Also note that sqlite comes as part of the python library, so we don't need to install sqlite seperatly.
 
-**Install Python**
+**On OSX** 
 
-On OSX follow the link: https://www.python.org/ftp/python/3.4.3/python-3.4.3-macosx10.6.pkg
+Follow the link: https://www.python.org/ftp/python/3.4.3/python-3.4.3-macosx10.6.pkg
 Open this and follow the instructions.
 
-On Linux
+**On Linux**
 
+```
 wget http://www.python.org/ftp/python/3.4.3/Python-3.4.3.tgz
 tar -xzf Python-3.4.3.tgz  
 cd Python-3.4.3
@@ -31,11 +32,25 @@ cd Python-3.4.3
 ./configure  
 make  
 sudo make install
+```
 
+=
+###Install pip on linux
 
-**Install Flask**
+We will use pip to install flask.
 
 ```
-pip install Flask
+sudo apt-get install python-pip
 ```
+
+=
+###Install Flask
+
+```
+sudo pip install Flask
+```
+
+=
+###Building the blog app
+
 
