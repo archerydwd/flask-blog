@@ -209,6 +209,6 @@ if __name__ == "__main__":
 	app.run()
 ```
 
-In the above we are first importing all the required libraries. We are then setting up the database tables and creating the connection to the database. Then we get into the flask app.
+In the above we are first importing all the required libraries. We are then setting up the database tables and creating the connection to the database. Then we get into the flask app and set up routes and methods for the CRUD actions. At the bottom we then set up a secret key and use if __name__ == "__main__" to tell if the app is being run locally or if it's on a platform that runs it automatically. If run locally we need to do app.run inside the if statement.
 
 
