@@ -206,9 +206,211 @@ connection.commit()
 
 app.config['SECRET_KEY'] = 'thisismysecretkeywhichyouwillneverguesshahahahahahahahaha'
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)
 ```
 
 In the above we are first importing all the required libraries. We are then setting up the database tables and creating the connection to the database. Then we get into the flask app and set up routes and methods for the CRUD actions. At the bottom we then set up a secret key and use if __name__ == "__main__" to tell if the app is being run locally or if it's on a platform that runs it automatically. If run locally we need to do app.run inside the if statement.
 
+=
+###Templates
 
+We now need to provide templates for our blog app to work. Flask uses Jinja2 templating, so we are going to build a hierarchical template structure. Starting with making a base html page:
+
+>mkdir templates
+
+**base.html**
+
+>touch templates/base.html
+
+>vim templates/base.html
+
+```
+<html>
+	<head>
+		<title>{{ the_title }}</title>
+	</head>
+	<body>
+		{% block the_body %}
+		
+		{% endblock %}
+	</body>
+</html>
+```
+
+Very simple. You can think of the parts inside the double brackets as variables that we pass in from the __init__.py file. Think of the {% parts as for control flow statements, such as if statements and replacement of sections. 
+
+**create.html**
+
+>touch templates/create.html
+
+>vim templates/create.html
+
+```
+{% extends "base.html" %}
+
+{% block the_body %}
+	<h1>New article</h1>
+	
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+				{% for message in messages %}
+					<li>{{ message }}
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+	
+	<form action="{{ save_article_link }}" method="POST">
+		<p>
+			Title:<br>
+			<input type="text" name="article_title">
+		</p>
+		<p>
+			Text:<br>
+			<textarea name="article_text"></textarea>
+		</p>
+		<p>
+			<input type="submit" value="Create Article">
+		</p>
+	</form>
+	<form action="{{ index_link }}" method="POST">
+		<button type="submit">Back</button>
+	</form>
+{% endblock %}
+```
+
+**index.html**
+
+>touch templates/index.html
+
+>vim templates/index.html
+
+```
+{% extends "base.html" %}
+
+{% block the_body %}
+	<h1>Listing articles</h1>
+	<a href="{{ create_link }}">New article</a>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Text</th>
+			<th colspan="3"></th>
+			{% for id, art_title, art_text in articles %}
+				<tr>
+					<td>{{ art_title }}</td>
+					<td>{{ art_text }}</td>
+					<td><form action="{{ show_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Show"></form></td>
+					<td><form action="{{ update_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Edit"></form></td>
+					<td><form action="{{ delete_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Destroy"></form></td>
+				</tr>
+			{% endfor %}
+	</table>
+{% endblock %}
+```
+
+**show.html**
+
+>touch templates/show.html
+
+>vim templates/show.html
+
+```
+{% extends "base.html" %}
+
+{% block the_body %}
+	{% for id, art_title, art_text in article %}
+		<p>
+			<strong>Title:</strong>
+			{{ art_title }}
+		</p>
+		<p>
+			<strong>Text:</strong>
+			{{ art_text }}
+		</p>
+	{% endfor %}
+
+		<h2>Comments</h2>
+			{% for comm_id, art_id, commenter, body in comments %}
+					<p>
+						<strong>Commenter:</strong>
+						{{ commenter }}
+					</p>
+					<p>
+						<strong>Comment:</strong>
+						{{ body }}
+					</p>
+					<form action="{{ delete_comment_link }}" method="POST"><input type="hidden" name="article_id" value="{{ art_id }}"><input type="hidden" name="comment_id" value="{{ comm_id }}"><input type="submit" value="Delete Comment"></form>
+			{% endfor %}
+
+	{% for id, art_title, art_text in article %}
+		<h2>Add a comment:</h2>
+		<form method="post" action="{{ create_comment_link }}">
+			<input type="hidden" name="article_id" value="{{ id }}" />
+			<p>
+				Commenter:<br>
+				<input type="text" name="commenter" />
+			</p>
+			<p>
+				Body:<br>
+				<textarea name="body"></textarea>
+			</p>
+			<p>
+				<input type="submit" value="Create Comment" />
+			</p>
+		</form>
+
+		<table>
+			<tr>
+				<td><form action="{{ index_link }}" method="POST"><button type="submit">Back</button></form></td>
+				<td><form action="{{ update_link }}" method="POST"><input type="hidden" name="article_id" value="{{ id }}"><input type="submit" value="Edit"></form></td>
+			</tr>
+		</table>
+	{% endfor %}
+{% endblock %}
+```
+
+**update.html**
+
+>touch templates/update.html
+
+>vim templates/update.html
+
+```
+{% extends "base.html" %}
+
+{% block the_body %}
+	{% for id, art_title, art_text in article %}
+	<form action="{{ changes_link }}" method="post">
+		<p>
+			Title:<br>
+			<input name="article_title" value="{{ art_title }}"/>
+		</p>
+		<p>
+			Text:<br>
+			<textarea name="article_text">{{ art_text }}</textarea>
+		</p>
+		<p>
+			<input type="hidden" name="article_id" value="{{ id }}" />
+			<input type="submit" value="Update Article"/>
+		</p>
+	</form>
+	{% endfor %}
+	<form action="{{ index_link }}" method="POST"><button type="submit">Back</button></form>
+{% endblock %}
+```
+
+=
+###Getting production ready
+
+remove debug = True from the app.run() line at the end of the __init__.py file.
+
+=
+###The End
+
+That's all there is to it.
+
+Thanks for reading and hopefully you learned something. :)
+
+Darren.
