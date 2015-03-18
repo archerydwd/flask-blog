@@ -54,6 +54,7 @@ sudo pip install Flask
 ###Building the blog app
 
 >touch __init__.py
+
 >vim __init__.py
 
 ```
