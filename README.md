@@ -209,6 +209,6 @@ if __name__ == "__main__":
 	app.run()
 ```
 
-In the above we are first importing sqlite3 
+In the above we are first importing all the required libraries. We are then setting up the database tables and creating the connection to the database. Then we get into the flask app.
 
 
