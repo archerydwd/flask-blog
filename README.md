@@ -412,8 +412,6 @@ remove debug = True from the app.run() line at the end of the __init__.py file.
 =
 ###The End
 
-That's all there is to it.
-
-Thanks for reading and hopefully you learned something. :)
+Thanks for reading.
 
 Darren.
