@@ -1,5 +1,9 @@
+'''
+Author: Darren Daly
+Version: 1.0
+'''
 import sqlite3
-from flask import Flask, render_template, url_for, request, redirect, flash, g, session
+from flask import Flask, render_template, url_for, request, redirect, flash
 
 app = Flask(__name__)
 
@@ -61,11 +65,7 @@ def save_article():
 			VALUES (?, ?)
 			"""
 			cursor.execute(INSERT, (request.form['article_title'], request.form['article_text']))
-			SELECT = """
-			SELECT * from articles
-			"""
-			articles_data = cursor.execute(SELECT)
-		return(render_template("index.html", the_title="Flask Blog", articles=articles_data, delete_link=url_for("delete_article"), update_link=url_for("update_article"), show_link=url_for("show_article"), create_link=url_for("create_article")))
+		return(redirect(url_for("display_articles")))
 	else:
 		return(redirect(url_for("create_article")))
 
@@ -103,9 +103,7 @@ def save_changes():
 		cursor = connection.cursor()
 		UPDATE = """UPDATE articles SET article_title = ?, article_text = ? WHERE article_id == ?"""
 		cursor.execute(UPDATE, (request.form['article_title'], request.form['article_text'], request.form['article_id']))
-		SELECT = """SELECT * from articles"""
-		articles_data = cursor.execute(SELECT)
-	return(render_template("index.html", the_title="Flask Blog", articles=articles_data, delete_link=url_for("delete_article"), update_link=url_for("update_article"), show_link=url_for("show_article"), create_link=url_for("create_article"))) 
+	return(redirect(url_for("display_articles")))
 
 @app.route('/comments/create', methods=['POST'])
 def create_comment():
