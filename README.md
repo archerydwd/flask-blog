@@ -62,7 +62,7 @@ sudo pip install Flask
 
 ```
 import sqlite3
-from flask import Flask, render_template, url_for, request, redirect, flash, g, session
+from flask import Flask, render_template, url_for, request, redirect, flash
 
 app = Flask(__name__)
 
